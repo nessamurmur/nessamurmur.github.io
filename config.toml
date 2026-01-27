@@ -1,0 +1,19 @@
+title = "My Blog"
+description = "A personal blog powered by njssg"
+author = "Nessa Jane"
+base_url = "https://blog.nessajane.tech"
+posts_per_page = 10
+
+[nav]
+links = [
+  { title = "Posts", url = "/posts/" },
+  { title = "Categories", url = "/categories/" },
+  { title = "About", url = "/about/" },
+]
+
+[social]
+github = "nessamurmur"
+linkedin = "nessajane"
+
+[rss]
+enabled = true

@@ -1,0 +1,12 @@
+{
+  "name": "njssg-site",
+  "version": "1.0.0",
+  "description": "Static site styles",
+  "scripts": {
+    "build:css": "tailwindcss -i ./static/css/input.css -o ./public/css/style.css --minify",
+    "watch:css": "tailwindcss -i ./static/css/input.css -o ./public/css/style.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Site navigation */
+.site-nav {
+  @apply bg-white shadow-sm sticky top-0 z-50;
+}
+
+.nav-container {
+  @apply container mx-auto px-4 py-4 flex items-center justify-between;
+}
+
+.site-title {
+  @apply text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors;
+}
+
+.nav-links {
+  @apply flex gap-6 list-none m-0 p-0;
+}
+
+.nav-link {
+  @apply text-gray-600 hover:text-blue-600 transition-colors;
+}
+
+/* Site footer */
+.site-footer {
+  @apply bg-gray-100 mt-auto;
+}
+
+.footer-container {
+  @apply container mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-4;
+}
+
+.social-links {
+  @apply flex gap-4;
+}
+
+.social-link {
+  @apply text-gray-600 hover:text-blue-600 transition-colors;
+}
+
+.rss-link {
+  @apply text-orange-500 hover:text-orange-600 transition-colors;
+}
+
+/* Home page */
+.home-page {
+  @apply space-y-12;
+}
+
+.hero {
+  @apply text-center py-12;
+}
+
+.hero-title {
+  @apply text-4xl md:text-5xl font-bold text-gray-900 mb-4;
+}
+
+.hero-description {
+  @apply text-xl text-gray-600 max-w-2xl mx-auto;
+}
+
+.recent-posts {
+  @apply space-y-6;
+}
+
+.section-header {
+  @apply text-2xl font-bold text-gray-900 border-b border-gray-200 pb-2;
+}
+
+/* Post cards */
+.posts-grid {
+  @apply grid gap-6 md:grid-cols-2 lg:grid-cols-3;
+}
+
+.post-card {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow;
+}
+
+.post-card .post-title {
+  @apply text-xl font-semibold text-gray-900 m-0;
+}
+
+.post-card .post-title a {
+  @apply hover:text-blue-600 transition-colors no-underline;
+}
+
+.post-date {
+  @apply text-sm text-gray-500;
+}
+
+.post-excerpt {
+  @apply text-gray-600 mt-2 line-clamp-3;
+}
+
+.post-categories {
+  @apply flex flex-wrap gap-2 mt-4;
+}
+
+.category-tag {
+  @apply inline-block px-2 py-1 bg-gray-100 text-gray-600 text-sm rounded hover:bg-blue-100 hover:text-blue-700 transition-colors no-underline;
+}
+
+.view-all {
+  @apply text-center mt-8;
+}
+
+.view-all-link {
+  @apply text-blue-600 hover:text-blue-800 font-medium;
+}
+
+.no-posts {
+  @apply text-gray-500 text-center py-8;
+}
+
+/* Single post page */
+.post-page {
+  @apply max-w-3xl mx-auto;
+}
+
+.post-page .post-header {
+  @apply mb-8 pb-8 border-b border-gray-200;
+}
+
+.post-page .post-title {
+  @apply text-3xl md:text-4xl font-bold text-gray-900 mb-4;
+}
+
+.post-page .post-meta {
+  @apply flex flex-wrap items-center gap-4;
+}
+
+.post-content {
+  @apply prose prose-lg max-w-none;
+}
+
+.post-content pre {
+  @apply bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto;
+}
+
+.post-content code {
+  @apply bg-gray-100 text-gray-800 px-1 py-0.5 rounded text-sm;
+}
+
+.post-content pre code {
+  @apply bg-transparent text-inherit p-0;
+}
+
+/* Static pages */
+.static-page {
+  @apply max-w-3xl mx-auto;
+}
+
+.page-header {
+  @apply mb-8 pb-8 border-b border-gray-200;
+}
+
+.page-title {
+  @apply text-3xl md:text-4xl font-bold text-gray-900;
+}
+
+.page-content {
+  @apply prose prose-lg max-w-none;
+}
+
+/* Posts listing */
+.posts-listing {
+  @apply space-y-8;
+}
+
+.posts-listing .page-title {
+  @apply text-3xl font-bold text-gray-900 mb-8;
+}
+
+/* Categories */
+.categories-listing {
+  @apply space-y-8;
+}
+
+.categories-listing .page-title {
+  @apply text-3xl font-bold text-gray-900 mb-8;
+}
+
+.categories-list {
+  @apply grid gap-4 md:grid-cols-2 lg:grid-cols-3 list-none p-0;
+}
+
+.category-item {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow;
+}
+
+.category-link {
+  @apply block p-4 no-underline;
+}
+
+.category-name {
+  @apply text-lg font-semibold text-gray-900;
+}
+
+.category-count {
+  @apply text-gray-500;
+}
+
+/* Category posts page */
+.category-posts {
+  @apply space-y-8;
+}
+
+.category-posts .page-title {
+  @apply text-3xl font-bold text-gray-900 mb-8;
+}
+
+/* Pagination */
+.pagination {
+  @apply flex items-center justify-center gap-4 mt-12 pt-8 border-t border-gray-200;
+}
+
+.pagination-link {
+  @apply px-4 py-2 rounded-lg transition-colors;
+}
+
+.pagination-link:not(.disabled) {
+  @apply bg-blue-600 text-white hover:bg-blue-700;
+}
+
+.pagination-link.disabled {
+  @apply bg-gray-100 text-gray-400 cursor-not-allowed;
+}
+
+.pagination-info {
+  @apply text-gray-600;
+}
