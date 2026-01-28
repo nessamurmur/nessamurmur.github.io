@@ -8,6 +8,7 @@ import glint
 import njssg/builder
 import njssg/config
 import njssg/content.{type Page, type Post}
+import njssg/frontmatter
 import njssg/markdown
 import njssg/server
 import simplifile
@@ -214,21 +215,42 @@ fn load_config() -> Result(config.Config, String) {
   }
 }
 
+fn format_frontmatter_error(err: frontmatter.FrontmatterError) -> String {
+  case err {
+    frontmatter.MissingDelimiter -> "missing +++ delimiters"
+    frontmatter.ParseError(msg) -> "invalid TOML: " <> msg
+    frontmatter.MissingField(field) -> "missing required field: " <> field
+  }
+}
+
 fn load_posts() -> List(Post) {
   case simplifile.read_directory(posts_dir) {
     Ok(files) -> {
-      files
-      |> list.filter(fn(f) { string.ends_with(f, ".md") })
-      |> list.filter_map(fn(file) {
+      let md_files = list.filter(files, fn(f) { string.ends_with(f, ".md") })
+
+      let #(posts, _) = list.fold(md_files, #([], []), fn(acc, file) {
+        let #(posts_acc, errors_acc) = acc
         let path = posts_dir <> "/" <> file
         let slug = string.drop_end(file, 3)
+
         case simplifile.read(path) {
-          Ok(content) ->
-            markdown.load_post(slug, content)
-            |> result.replace_error(Nil)
-          Error(_) -> Error(Nil)
+          Ok(content) -> {
+            case markdown.load_post(slug, content) {
+              Ok(post) -> #([post, ..posts_acc], errors_acc)
+              Error(err) -> {
+                io.println("  Warning: Skipping " <> file <> " - " <> format_frontmatter_error(err))
+                #(posts_acc, [file, ..errors_acc])
+              }
+            }
+          }
+          Error(_) -> {
+            io.println("  Warning: Could not read " <> file)
+            #(posts_acc, [file, ..errors_acc])
+          }
         }
       })
+
+      list.reverse(posts)
     }
     Error(_) -> []
   }
@@ -237,18 +259,31 @@ fn load_posts() -> List(Post) {
 fn load_pages() -> List(Page) {
   case simplifile.read_directory(pages_dir) {
     Ok(files) -> {
-      files
-      |> list.filter(fn(f) { string.ends_with(f, ".md") })
-      |> list.filter_map(fn(file) {
+      let md_files = list.filter(files, fn(f) { string.ends_with(f, ".md") })
+
+      let #(pages, _) = list.fold(md_files, #([], []), fn(acc, file) {
+        let #(pages_acc, errors_acc) = acc
         let path = pages_dir <> "/" <> file
         let slug = string.drop_end(file, 3)
+
         case simplifile.read(path) {
-          Ok(content) ->
-            markdown.load_page(slug, content)
-            |> result.replace_error(Nil)
-          Error(_) -> Error(Nil)
+          Ok(content) -> {
+            case markdown.load_page(slug, content) {
+              Ok(page) -> #([page, ..pages_acc], errors_acc)
+              Error(err) -> {
+                io.println("  Warning: Skipping " <> file <> " - " <> format_frontmatter_error(err))
+                #(pages_acc, [file, ..errors_acc])
+              }
+            }
+          }
+          Error(_) -> {
+            io.println("  Warning: Could not read " <> file)
+            #(pages_acc, [file, ..errors_acc])
+          }
         }
       })
+
+      list.reverse(pages)
     }
     Error(_) -> []
   }
