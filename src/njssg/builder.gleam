@@ -82,7 +82,8 @@ fn build_posts_listing(
   list.range(1, total_pages)
   |> list.fold(files, fn(acc, page_num) {
     let page_posts = get_page(paginated, page_num) |> result.unwrap([])
-    let content = posts_template.render(config, page_posts, page_num, total_pages)
+    let content =
+      posts_template.render(config, page_posts, page_num, total_pages)
     let html =
       layout.render(config, "Posts", content)
       |> layout.to_html_string

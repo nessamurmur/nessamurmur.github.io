@@ -46,7 +46,9 @@ fn post_to_item(config: Config, post: Post) -> String {
 
   let categories =
     post.categories
-    |> list.map(fn(cat) { "      <category>" <> escape_xml(cat) <> "</category>" })
+    |> list.map(fn(cat) {
+      "      <category>" <> escape_xml(cat) <> "</category>"
+    })
     |> string.join("\n")
 
   let category_section = case categories {

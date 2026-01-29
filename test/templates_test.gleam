@@ -2,16 +2,18 @@ import gleam/option.{None, Some}
 import gleam/string
 import gleeunit/should
 import lustre/element
-import njssg/config.{type Config, AuthorConfig, Config, NavConfig, NavLink, RssConfig, SocialLinks}
+import njssg/config.{
+  type Config, AuthorConfig, Config, NavConfig, NavLink, RssConfig, SocialLinks,
+}
 import njssg/content.{type Page, type Post, Page, Post}
-import njssg/templates/components
-import njssg/templates/layout
-import njssg/templates/home
-import njssg/templates/post as post_template
-import njssg/templates/posts as posts_template
-import njssg/templates/page as page_template
 import njssg/templates/categories as categories_template
 import njssg/templates/category as category_template
+import njssg/templates/components
+import njssg/templates/home
+import njssg/templates/layout
+import njssg/templates/page as page_template
+import njssg/templates/post as post_template
+import njssg/templates/posts as posts_template
 
 fn test_config() -> Config {
   Config(
@@ -24,9 +26,18 @@ fn test_config() -> Config {
       NavLink(title: "Posts", url: "/posts/"),
       NavLink(title: "About", url: "/about/"),
     ]),
-    social: SocialLinks(github: Some("testuser"), linkedin: Some("testlinkedin"), mastodon: None, bluesky: None),
+    social: SocialLinks(
+      github: Some("testuser"),
+      linkedin: Some("testlinkedin"),
+      mastodon: None,
+      bluesky: None,
+    ),
     rss: RssConfig(enabled: True),
-    author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
+    author_config: AuthorConfig(
+      avatar_url: None,
+      tagline: None,
+      extra_links: [],
+    ),
   )
 }
 
@@ -179,7 +190,8 @@ pub fn categories_listing_test() {
 pub fn category_posts_test() {
   let config = test_config()
   let posts = [test_post()]
-  let html = category_template.render(config, "code", posts) |> element.to_string
+  let html =
+    category_template.render(config, "code", posts) |> element.to_string
 
   should.be_true(html |> string.contains("code"))
   should.be_true(html |> string.contains("Test Post Title"))

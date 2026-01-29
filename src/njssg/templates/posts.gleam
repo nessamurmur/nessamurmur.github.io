@@ -17,8 +17,7 @@ pub fn render(
     h1([class("page-title")], [text("Posts")]),
     case posts {
       [] -> p([class("no-posts")], [text("No posts yet.")])
-      _ ->
-        div([class("posts-grid")], list.map(posts, components.post_card))
+      _ -> div([class("posts-grid")], list.map(posts, components.post_card))
     },
     components.pagination(current_page, total_pages),
   ])

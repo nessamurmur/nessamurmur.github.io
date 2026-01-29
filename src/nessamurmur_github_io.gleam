@@ -138,14 +138,9 @@ fn create_new_post(slug: String) -> Nil {
       // Get current date (placeholder)
       let date = "2025-01-27"
 
-      let content =
-        "+++
-title = \""
-        <> slug_to_title(slug)
-        <> "\"
-date = \""
-        <> date
-        <> "\"
+      let content = "+++
+title = \"" <> slug_to_title(slug) <> "\"
+date = \"" <> date <> "\"
 categories = []
 description = \"\"
 draft = true
@@ -185,11 +180,8 @@ fn create_new_page(slug: String) -> Nil {
       // Create directory if needed
       let _ = simplifile.create_directory_all(pages_dir)
 
-      let content =
-        "+++
-title = \""
-        <> slug_to_title(slug)
-        <> "\"
+      let content = "+++
+title = \"" <> slug_to_title(slug) <> "\"
 description = \"\"
 +++
 
@@ -228,27 +220,33 @@ fn load_posts() -> List(Post) {
     Ok(files) -> {
       let md_files = list.filter(files, fn(f) { string.ends_with(f, ".md") })
 
-      let #(posts, _) = list.fold(md_files, #([], []), fn(acc, file) {
-        let #(posts_acc, errors_acc) = acc
-        let path = posts_dir <> "/" <> file
-        let slug = string.drop_end(file, 3)
+      let #(posts, _) =
+        list.fold(md_files, #([], []), fn(acc, file) {
+          let #(posts_acc, errors_acc) = acc
+          let path = posts_dir <> "/" <> file
+          let slug = string.drop_end(file, 3)
 
-        case simplifile.read(path) {
-          Ok(content) -> {
-            case markdown.load_post(slug, content) {
-              Ok(post) -> #([post, ..posts_acc], errors_acc)
-              Error(err) -> {
-                io.println("  Warning: Skipping " <> file <> " - " <> format_frontmatter_error(err))
-                #(posts_acc, [file, ..errors_acc])
+          case simplifile.read(path) {
+            Ok(content) -> {
+              case markdown.load_post(slug, content) {
+                Ok(post) -> #([post, ..posts_acc], errors_acc)
+                Error(err) -> {
+                  io.println(
+                    "  Warning: Skipping "
+                    <> file
+                    <> " - "
+                    <> format_frontmatter_error(err),
+                  )
+                  #(posts_acc, [file, ..errors_acc])
+                }
               }
             }
+            Error(_) -> {
+              io.println("  Warning: Could not read " <> file)
+              #(posts_acc, [file, ..errors_acc])
+            }
           }
-          Error(_) -> {
-            io.println("  Warning: Could not read " <> file)
-            #(posts_acc, [file, ..errors_acc])
-          }
-        }
-      })
+        })
 
       list.reverse(posts)
     }
@@ -261,27 +259,33 @@ fn load_pages() -> List(Page) {
     Ok(files) -> {
       let md_files = list.filter(files, fn(f) { string.ends_with(f, ".md") })
 
-      let #(pages, _) = list.fold(md_files, #([], []), fn(acc, file) {
-        let #(pages_acc, errors_acc) = acc
-        let path = pages_dir <> "/" <> file
-        let slug = string.drop_end(file, 3)
+      let #(pages, _) =
+        list.fold(md_files, #([], []), fn(acc, file) {
+          let #(pages_acc, errors_acc) = acc
+          let path = pages_dir <> "/" <> file
+          let slug = string.drop_end(file, 3)
 
-        case simplifile.read(path) {
-          Ok(content) -> {
-            case markdown.load_page(slug, content) {
-              Ok(page) -> #([page, ..pages_acc], errors_acc)
-              Error(err) -> {
-                io.println("  Warning: Skipping " <> file <> " - " <> format_frontmatter_error(err))
-                #(pages_acc, [file, ..errors_acc])
+          case simplifile.read(path) {
+            Ok(content) -> {
+              case markdown.load_page(slug, content) {
+                Ok(page) -> #([page, ..pages_acc], errors_acc)
+                Error(err) -> {
+                  io.println(
+                    "  Warning: Skipping "
+                    <> file
+                    <> " - "
+                    <> format_frontmatter_error(err),
+                  )
+                  #(pages_acc, [file, ..errors_acc])
+                }
               }
             }
+            Error(_) -> {
+              io.println("  Warning: Could not read " <> file)
+              #(pages_acc, [file, ..errors_acc])
+            }
           }
-          Error(_) -> {
-            io.println("  Warning: Could not read " <> file)
-            #(pages_acc, [file, ..errors_acc])
-          }
-        }
-      })
+        })
 
       list.reverse(pages)
     }

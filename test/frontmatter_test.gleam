@@ -83,7 +83,8 @@ Content without date"
 }
 
 pub fn parse_missing_delimiters_test() {
-  let content = "title = \"No Delimiters\"
+  let content =
+    "title = \"No Delimiters\"
 date = \"2025-01-27\"
 
 This has no frontmatter delimiters"

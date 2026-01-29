@@ -14,9 +14,18 @@ pub fn generate_rss_basic_test() {
       base_url: "https://test.com",
       posts_per_page: 10,
       nav: NavConfig(links: []),
-      social: SocialLinks(github: None, linkedin: None, mastodon: None, bluesky: None),
+      social: SocialLinks(
+        github: None,
+        linkedin: None,
+        mastodon: None,
+        bluesky: None,
+      ),
       rss: RssConfig(enabled: True),
-      author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
+      author_config: AuthorConfig(
+        avatar_url: None,
+        tagline: None,
+        extra_links: [],
+      ),
     )
 
   let posts = [
@@ -34,7 +43,9 @@ pub fn generate_rss_basic_test() {
   let xml = rss.generate(config, posts)
 
   // Check XML declaration
-  should.be_true(xml |> string.starts_with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"))
+  should.be_true(
+    xml |> string.starts_with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"),
+  )
 
   // Check RSS structure
   should.be_true(xml |> string.contains("<rss version=\"2.0\""))
@@ -52,16 +63,29 @@ pub fn generate_rss_channel_info_test() {
       base_url: "https://blog.example.com",
       posts_per_page: 10,
       nav: NavConfig(links: []),
-      social: SocialLinks(github: None, linkedin: None, mastodon: None, bluesky: None),
+      social: SocialLinks(
+        github: None,
+        linkedin: None,
+        mastodon: None,
+        bluesky: None,
+      ),
       rss: RssConfig(enabled: True),
-      author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
+      author_config: AuthorConfig(
+        avatar_url: None,
+        tagline: None,
+        extra_links: [],
+      ),
     )
 
   let xml = rss.generate(config, [])
 
   should.be_true(xml |> string.contains("<title>My Blog</title>"))
-  should.be_true(xml |> string.contains("<description>My personal blog</description>"))
-  should.be_true(xml |> string.contains("<link>https://blog.example.com</link>"))
+  should.be_true(
+    xml |> string.contains("<description>My personal blog</description>"),
+  )
+  should.be_true(
+    xml |> string.contains("<link>https://blog.example.com</link>"),
+  )
 }
 
 pub fn generate_rss_items_test() {
@@ -73,9 +97,18 @@ pub fn generate_rss_items_test() {
       base_url: "https://test.com",
       posts_per_page: 10,
       nav: NavConfig(links: []),
-      social: SocialLinks(github: None, linkedin: None, mastodon: None, bluesky: None),
+      social: SocialLinks(
+        github: None,
+        linkedin: None,
+        mastodon: None,
+        bluesky: None,
+      ),
       rss: RssConfig(enabled: True),
-      author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
+      author_config: AuthorConfig(
+        avatar_url: None,
+        tagline: None,
+        extra_links: [],
+      ),
     )
 
   let posts = [
@@ -94,8 +127,12 @@ pub fn generate_rss_items_test() {
 
   should.be_true(xml |> string.contains("<item>"))
   should.be_true(xml |> string.contains("<title>My Post Title</title>"))
-  should.be_true(xml |> string.contains("<link>https://test.com/posts/my-post/</link>"))
-  should.be_true(xml |> string.contains("<description>Post description</description>"))
+  should.be_true(
+    xml |> string.contains("<link>https://test.com/posts/my-post/</link>"),
+  )
+  should.be_true(
+    xml |> string.contains("<description>Post description</description>"),
+  )
   should.be_true(xml |> string.contains("<category>code</category>"))
   should.be_true(xml |> string.contains("<category>gleam</category>"))
 }
@@ -109,9 +146,18 @@ pub fn generate_rss_escape_special_chars_test() {
       base_url: "https://test.com",
       posts_per_page: 10,
       nav: NavConfig(links: []),
-      social: SocialLinks(github: None, linkedin: None, mastodon: None, bluesky: None),
+      social: SocialLinks(
+        github: None,
+        linkedin: None,
+        mastodon: None,
+        bluesky: None,
+      ),
       rss: RssConfig(enabled: True),
-      author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
+      author_config: AuthorConfig(
+        avatar_url: None,
+        tagline: None,
+        extra_links: [],
+      ),
     )
 
   let posts = [
@@ -143,9 +189,18 @@ pub fn generate_rss_multiple_posts_test() {
       base_url: "https://test.com",
       posts_per_page: 10,
       nav: NavConfig(links: []),
-      social: SocialLinks(github: None, linkedin: None, mastodon: None, bluesky: None),
+      social: SocialLinks(
+        github: None,
+        linkedin: None,
+        mastodon: None,
+        bluesky: None,
+      ),
       rss: RssConfig(enabled: True),
-      author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
+      author_config: AuthorConfig(
+        avatar_url: None,
+        tagline: None,
+        extra_links: [],
+      ),
     )
 
   let posts = [
@@ -194,9 +249,18 @@ pub fn generate_rss_no_description_test() {
       base_url: "https://test.com",
       posts_per_page: 10,
       nav: NavConfig(links: []),
-      social: SocialLinks(github: None, linkedin: None, mastodon: None, bluesky: None),
+      social: SocialLinks(
+        github: None,
+        linkedin: None,
+        mastodon: None,
+        bluesky: None,
+      ),
       rss: RssConfig(enabled: True),
-      author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
+      author_config: AuthorConfig(
+        avatar_url: None,
+        tagline: None,
+        extra_links: [],
+      ),
     )
 
   let posts = [

@@ -11,10 +11,9 @@ pub fn render(_config: Config, post: Post) -> Element(msg) {
     header([class("post-header")], [
       h1([class("post-title")], [text(post.title)]),
       div([class("post-meta")], [
-        time(
-          [class("post-date"), attribute("datetime", post.date)],
-          [text(post.date)],
-        ),
+        time([class("post-date"), attribute("datetime", post.date)], [
+          text(post.date),
+        ]),
         case post.categories {
           [] -> text("")
           cats ->

@@ -97,9 +97,7 @@ pub fn category_url(category: String) -> String {
 }
 
 /// Count posts per category
-pub fn count_posts_per_category(
-  posts: List(Post),
-) -> List(#(String, Int)) {
+pub fn count_posts_per_category(posts: List(Post)) -> List(#(String, Int)) {
   let categories = get_all_categories(posts)
   list.map(categories, fn(cat) {
     let count = list.length(filter_by_category(posts, cat))

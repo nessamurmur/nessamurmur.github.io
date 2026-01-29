@@ -7,7 +7,11 @@ import njssg/content.{type Post}
 import njssg/templates/components
 
 /// Render posts for a single category
-pub fn render(_config: Config, category: String, posts: List(Post)) -> Element(msg) {
+pub fn render(
+  _config: Config,
+  category: String,
+  posts: List(Post),
+) -> Element(msg) {
   section([class("category-posts")], [
     h1([class("page-title")], [text("Category: " <> category)]),
     case posts {

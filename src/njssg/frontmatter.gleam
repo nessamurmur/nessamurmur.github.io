@@ -29,7 +29,9 @@ pub type FrontmatterError {
 const delimiter = "+++"
 
 /// Parse post frontmatter and return (frontmatter, body)
-pub fn parse(content: String) -> Result(#(Frontmatter, String), FrontmatterError) {
+pub fn parse(
+  content: String,
+) -> Result(#(Frontmatter, String), FrontmatterError) {
   use #(toml_str, body) <- result.try(extract_frontmatter(content))
   use parsed <- result.try(
     tom.parse(toml_str)
@@ -103,7 +105,9 @@ pub fn parse_page(
 }
 
 /// Extract the TOML content between +++ delimiters and return (toml, body)
-fn extract_frontmatter(content: String) -> Result(#(String, String), FrontmatterError) {
+fn extract_frontmatter(
+  content: String,
+) -> Result(#(String, String), FrontmatterError) {
   let trimmed = string.trim_start(content)
 
   case string.starts_with(trimmed, delimiter) {

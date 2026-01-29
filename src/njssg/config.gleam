@@ -148,13 +148,19 @@ fn parse_social(toml: Dict(String, Toml)) -> SocialLinks {
     Ok(s) -> Some(s)
     Error(_) -> None
   }
-  SocialLinks(github: github, linkedin: linkedin, mastodon: mastodon, bluesky: bluesky)
+  SocialLinks(
+    github: github,
+    linkedin: linkedin,
+    mastodon: mastodon,
+    bluesky: bluesky,
+  )
 }
 
 fn parse_rss(toml: Dict(String, Toml)) -> RssConfig {
   let enabled = case tom.get_bool(toml, ["rss", "enabled"]) {
     Ok(b) -> b
-    Error(_) -> True  // default to enabled
+    Error(_) -> True
+    // default to enabled
   }
   RssConfig(enabled: enabled)
 }
@@ -172,7 +178,11 @@ fn parse_author_config(toml: Dict(String, Toml)) -> AuthorConfig {
     Ok(arr) -> list.filter_map(arr, parse_inline_link)
     Error(_) -> []
   }
-  AuthorConfig(avatar_url: avatar_url, tagline: tagline, extra_links: extra_links)
+  AuthorConfig(
+    avatar_url: avatar_url,
+    tagline: tagline,
+    extra_links: extra_links,
+  )
 }
 
 pub fn get_nav_links(config: Config) -> List(NavLink) {

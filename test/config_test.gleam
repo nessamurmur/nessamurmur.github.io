@@ -3,7 +3,8 @@ import gleeunit/should
 import njssg/config.{NavLink}
 
 pub fn parse_valid_config_test() {
-  let toml = "
+  let toml =
+    "
 title = \"My Blog\"
 description = \"A personal blog\"
 author = \"Nessa Jane\"
@@ -38,7 +39,8 @@ enabled = true
 }
 
 pub fn parse_nav_links_test() {
-  let toml = "
+  let toml =
+    "
 title = \"Test\"
 description = \"Test\"
 author = \"Test\"
@@ -60,7 +62,8 @@ links = [
 }
 
 pub fn parse_social_links_test() {
-  let toml = "
+  let toml =
+    "
 title = \"Test\"
 description = \"Test\"
 author = \"Test\"
@@ -79,7 +82,8 @@ linkedin = \"testlinkedin\"
 }
 
 pub fn parse_rss_config_test() {
-  let toml = "
+  let toml =
+    "
 title = \"Test\"
 description = \"Test\"
 author = \"Test\"
@@ -95,7 +99,8 @@ enabled = true
 }
 
 pub fn parse_rss_disabled_test() {
-  let toml = "
+  let toml =
+    "
 title = \"Test\"
 description = \"Test\"
 author = \"Test\"
@@ -111,7 +116,8 @@ enabled = false
 }
 
 pub fn parse_default_posts_per_page_test() {
-  let toml = "
+  let toml =
+    "
 title = \"Test\"
 description = \"Test\"
 author = \"Test\"
@@ -119,11 +125,13 @@ base_url = \"https://test.com\"
 "
 
   let assert Ok(cfg) = config.parse(toml)
-  should.equal(cfg.posts_per_page, 10)  // default value
+  should.equal(cfg.posts_per_page, 10)
+  // default value
 }
 
 pub fn parse_missing_required_field_test() {
-  let toml = "
+  let toml =
+    "
 description = \"A blog without a title\"
 "
 
@@ -132,7 +140,8 @@ description = \"A blog without a title\"
 }
 
 pub fn parse_empty_nav_links_test() {
-  let toml = "
+  let toml =
+    "
 title = \"Test\"
 description = \"Test\"
 author = \"Test\"
@@ -145,7 +154,8 @@ posts_per_page = 5
 }
 
 pub fn parse_empty_social_test() {
-  let toml = "
+  let toml =
+    "
 title = \"Test\"
 description = \"Test\"
 author = \"Test\"
@@ -160,7 +170,8 @@ posts_per_page = 5
 }
 
 pub fn default_rss_enabled_test() {
-  let toml = "
+  let toml =
+    "
 title = \"Test\"
 description = \"Test\"
 author = \"Test\"
@@ -168,5 +179,6 @@ base_url = \"https://test.com\"
 "
 
   let assert Ok(cfg) = config.parse(toml)
-  should.equal(config.get_rss(cfg).enabled, True)  // default to enabled
+  should.equal(config.get_rss(cfg).enabled, True)
+  // default to enabled
 }

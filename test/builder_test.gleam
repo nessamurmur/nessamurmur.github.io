@@ -2,7 +2,9 @@ import gleam/option.{None, Some}
 import gleam/string
 import gleeunit/should
 import njssg/builder
-import njssg/config.{type Config, AuthorConfig, Config, NavConfig, RssConfig, SocialLinks}
+import njssg/config.{
+  type Config, AuthorConfig, Config, NavConfig, RssConfig, SocialLinks,
+}
 import njssg/content.{type Page, type Post, Page, Post}
 
 fn test_config() -> Config {
@@ -13,9 +15,18 @@ fn test_config() -> Config {
     base_url: "https://test.com",
     posts_per_page: 2,
     nav: NavConfig(links: []),
-    social: SocialLinks(github: None, linkedin: None, mastodon: None, bluesky: None),
+    social: SocialLinks(
+      github: None,
+      linkedin: None,
+      mastodon: None,
+      bluesky: None,
+    ),
     rss: RssConfig(enabled: True),
-    author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
+    author_config: AuthorConfig(
+      avatar_url: None,
+      tagline: None,
+      extra_links: [],
+    ),
   )
 }
 
@@ -83,7 +94,8 @@ pub fn build_posts_listing_test() {
 }
 
 pub fn build_pagination_test() {
-  let config = test_config()  // posts_per_page = 2
+  let config = test_config()
+  // posts_per_page = 2
   let posts = [
     test_post("post-1", "2025-01-27"),
     test_post("post-2", "2025-01-26"),

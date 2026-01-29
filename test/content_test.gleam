@@ -268,8 +268,7 @@ pub fn post_url_test() {
 }
 
 pub fn page_url_test() {
-  let page =
-    Page(slug: "about", title: "About", description: None, body: "")
+  let page = Page(slug: "about", title: "About", description: None, body: "")
 
   should.equal(content.page_url(page), "/about/")
 }

@@ -12,7 +12,9 @@ pub fn site_nav(config: Config) -> Element(msg) {
   let links =
     config.nav.links
     |> list.map(fn(link) {
-      html.li([], [html.a([href(link.url), class("nav-link")], [text(link.title)])])
+      html.li([], [
+        html.a([href(link.url), class("nav-link")], [text(link.title)]),
+      ])
     })
 
   html.nav([class("site-nav")], [
@@ -22,7 +24,10 @@ pub fn site_nav(config: Config) -> Element(msg) {
       html.button(
         [
           class("theme-toggle"),
-          attribute("onclick", "document.documentElement.classList.toggle('dark');localStorage.setItem('theme',document.documentElement.classList.contains('dark')?'dark':'light')"),
+          attribute(
+            "onclick",
+            "document.documentElement.classList.toggle('dark');localStorage.setItem('theme',document.documentElement.classList.contains('dark')?'dark':'light')",
+          ),
           attribute("aria-label", "Toggle dark mode"),
         ],
         [text("\u{1f313}")],
@@ -35,15 +40,27 @@ pub fn site_nav(config: Config) -> Element(msg) {
 pub fn site_footer(config: Config) -> Element(msg) {
   let social_links = {
     let gh = case config.social.github {
-      Some(g) -> [html.a([href("https://github.com/" <> g), class("social-link")], [text("GitHub")])]
+      Some(g) -> [
+        html.a([href("https://github.com/" <> g), class("social-link")], [
+          text("GitHub"),
+        ]),
+      ]
       None -> []
     }
     let li = case config.social.linkedin {
-      Some(l) -> [html.a([href("https://linkedin.com/in/" <> l), class("social-link")], [text("LinkedIn")])]
+      Some(l) -> [
+        html.a([href("https://linkedin.com/in/" <> l), class("social-link")], [
+          text("LinkedIn"),
+        ]),
+      ]
       None -> []
     }
     let masto = case config.social.mastodon {
-      Some(m) -> [html.a([href(m), attribute("rel", "me"), class("social-link")], [text("Mastodon")])]
+      Some(m) -> [
+        html.a([href(m), attribute("rel", "me"), class("social-link")], [
+          text("Mastodon"),
+        ]),
+      ]
       None -> []
     }
     let bsky = case config.social.bluesky {
@@ -75,9 +92,12 @@ pub fn post_card(post: Post) -> Element(msg) {
       html.h2([class("post-title")], [
         html.a([href(post_url(post))], [text(post.title)]),
       ]),
-      html.time([class("post-date"), attribute.attribute("datetime", post.date)], [
-        text(post.date),
-      ]),
+      html.time(
+        [class("post-date"), attribute.attribute("datetime", post.date)],
+        [
+          text(post.date),
+        ],
+      ),
     ]),
     case post.description {
       Some(desc) -> html.p([class("post-excerpt")], [text(desc)])
@@ -101,7 +121,9 @@ pub fn category_link(category: String, count: Int) -> Element(msg) {
   html.li([class("category-item")], [
     html.a([href(category_url(category)), class("category-link")], [
       html.span([class("category-name")], [text(category)]),
-      html.span([class("category-count")], [text(" (" <> int.to_string(count) <> ")")]),
+      html.span([class("category-count")], [
+        text(" (" <> int.to_string(count) <> ")"),
+      ]),
     ]),
   ])
 }
@@ -117,22 +139,33 @@ pub fn pagination(current_page: Int, total_pages: Int) -> Element(msg) {
             2 -> "/posts/"
             n -> "/posts/page/" <> int.to_string(n - 1) <> "/"
           }
-          html.a([href(prev_url), class("pagination-link prev")], [text("← Previous")])
+          html.a([href(prev_url), class("pagination-link prev")], [
+            text("← Previous"),
+          ])
         }
-        False -> html.span([class("pagination-link prev disabled")], [text("← Previous")])
+        False ->
+          html.span([class("pagination-link prev disabled")], [
+            text("← Previous"),
+          ])
       }
 
       let next_link = case current_page < total_pages {
         True -> {
           let next_url =
             "/posts/page/" <> int.to_string(current_page + 1) <> "/"
-          html.a([href(next_url), class("pagination-link next")], [text("Next →")])
+          html.a([href(next_url), class("pagination-link next")], [
+            text("Next →"),
+          ])
         }
-        False -> html.span([class("pagination-link next disabled")], [text("Next →")])
+        False ->
+          html.span([class("pagination-link next disabled")], [text("Next →")])
       }
 
       let page_info =
-        "Page " <> int.to_string(current_page) <> " of " <> int.to_string(total_pages)
+        "Page "
+        <> int.to_string(current_page)
+        <> " of "
+        <> int.to_string(total_pages)
 
       html.nav([class("pagination")], [
         prev_link,
@@ -161,21 +194,34 @@ pub fn author_bio(config: Config) -> Element(msg) {
   }
 
   let tagline_el = case config.author_config.tagline {
-    Some(t) -> html.p([class("text-gray-600 dark:text-gray-300 mb-4")], [text(t)])
+    Some(t) ->
+      html.p([class("text-gray-600 dark:text-gray-300 mb-4")], [text(t)])
     None -> text("")
   }
 
   let social_links = {
     let gh = case config.social.github {
-      Some(g) -> [html.a([href("https://github.com/" <> g), class("social-link")], [text("GitHub")])]
+      Some(g) -> [
+        html.a([href("https://github.com/" <> g), class("social-link")], [
+          text("GitHub"),
+        ]),
+      ]
       None -> []
     }
     let li = case config.social.linkedin {
-      Some(l) -> [html.a([href("https://linkedin.com/in/" <> l), class("social-link")], [text("LinkedIn")])]
+      Some(l) -> [
+        html.a([href("https://linkedin.com/in/" <> l), class("social-link")], [
+          text("LinkedIn"),
+        ]),
+      ]
       None -> []
     }
     let masto = case config.social.mastodon {
-      Some(m) -> [html.a([href(m), attribute("rel", "me"), class("social-link")], [text("Mastodon")])]
+      Some(m) -> [
+        html.a([href(m), attribute("rel", "me"), class("social-link")], [
+          text("Mastodon"),
+        ]),
+      ]
       None -> []
     }
     let bsky = case config.social.bluesky {
@@ -185,9 +231,10 @@ pub fn author_bio(config: Config) -> Element(msg) {
     list.flatten([gh, li, masto, bsky])
   }
 
-  let extra = list.map(config.author_config.extra_links, fn(link) {
-    html.a([href(link.url), class("social-link")], [text(link.title)])
-  })
+  let extra =
+    list.map(config.author_config.extra_links, fn(link) {
+      html.a([href(link.url), class("social-link")], [text(link.title)])
+    })
 
   let all_links = list.append(social_links, extra)
 
