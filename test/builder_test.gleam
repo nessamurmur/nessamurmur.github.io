@@ -13,7 +13,7 @@ fn test_config() -> Config {
     base_url: "https://test.com",
     posts_per_page: 2,
     nav: NavConfig(links: []),
-    social: SocialLinks(github: None, linkedin: None),
+    social: SocialLinks(github: None, linkedin: None, mastodon: None, bluesky: None),
     rss: RssConfig(enabled: True),
     author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
   )

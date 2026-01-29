@@ -33,30 +33,24 @@ pub fn site_nav(config: Config) -> Element(msg) {
 
 /// Site footer
 pub fn site_footer(config: Config) -> Element(msg) {
-  let social_links = case config.social.github, config.social.linkedin {
-    Some(gh), Some(li) -> [
-      html.a(
-        [href("https://github.com/" <> gh), class("social-link")],
-        [text("GitHub")],
-      ),
-      html.a(
-        [href("https://linkedin.com/in/" <> li), class("social-link")],
-        [text("LinkedIn")],
-      ),
-    ]
-    Some(gh), None -> [
-      html.a(
-        [href("https://github.com/" <> gh), class("social-link")],
-        [text("GitHub")],
-      ),
-    ]
-    None, Some(li) -> [
-      html.a(
-        [href("https://linkedin.com/in/" <> li), class("social-link")],
-        [text("LinkedIn")],
-      ),
-    ]
-    None, None -> []
+  let social_links = {
+    let gh = case config.social.github {
+      Some(g) -> [html.a([href("https://github.com/" <> g), class("social-link")], [text("GitHub")])]
+      None -> []
+    }
+    let li = case config.social.linkedin {
+      Some(l) -> [html.a([href("https://linkedin.com/in/" <> l), class("social-link")], [text("LinkedIn")])]
+      None -> []
+    }
+    let masto = case config.social.mastodon {
+      Some(m) -> [html.a([href(m), attribute("rel", "me"), class("social-link")], [text("Mastodon")])]
+      None -> []
+    }
+    let bsky = case config.social.bluesky {
+      Some(b) -> [html.a([href(b), class("social-link")], [text("Bluesky")])]
+      None -> []
+    }
+    list.flatten([gh, li, masto, bsky])
   }
 
   html.footer([class("site-footer")], [
@@ -171,18 +165,24 @@ pub fn author_bio(config: Config) -> Element(msg) {
     None -> text("")
   }
 
-  let social_links = case config.social.github, config.social.linkedin {
-    Some(gh), Some(li) -> [
-      html.a([href("https://github.com/" <> gh), class("social-link")], [text("GitHub")]),
-      html.a([href("https://linkedin.com/in/" <> li), class("social-link")], [text("LinkedIn")]),
-    ]
-    Some(gh), None -> [
-      html.a([href("https://github.com/" <> gh), class("social-link")], [text("GitHub")]),
-    ]
-    None, Some(li) -> [
-      html.a([href("https://linkedin.com/in/" <> li), class("social-link")], [text("LinkedIn")]),
-    ]
-    None, None -> []
+  let social_links = {
+    let gh = case config.social.github {
+      Some(g) -> [html.a([href("https://github.com/" <> g), class("social-link")], [text("GitHub")])]
+      None -> []
+    }
+    let li = case config.social.linkedin {
+      Some(l) -> [html.a([href("https://linkedin.com/in/" <> l), class("social-link")], [text("LinkedIn")])]
+      None -> []
+    }
+    let masto = case config.social.mastodon {
+      Some(m) -> [html.a([href(m), attribute("rel", "me"), class("social-link")], [text("Mastodon")])]
+      None -> []
+    }
+    let bsky = case config.social.bluesky {
+      Some(b) -> [html.a([href(b), class("social-link")], [text("Bluesky")])]
+      None -> []
+    }
+    list.flatten([gh, li, masto, bsky])
   }
 
   let extra = list.map(config.author_config.extra_links, fn(link) {

@@ -27,7 +27,12 @@ pub type NavLink {
 }
 
 pub type SocialLinks {
-  SocialLinks(github: Option(String), linkedin: Option(String))
+  SocialLinks(
+    github: Option(String),
+    linkedin: Option(String),
+    mastodon: Option(String),
+    bluesky: Option(String),
+  )
 }
 
 pub type RssConfig {
@@ -135,7 +140,15 @@ fn parse_social(toml: Dict(String, Toml)) -> SocialLinks {
     Ok(s) -> Some(s)
     Error(_) -> None
   }
-  SocialLinks(github: github, linkedin: linkedin)
+  let mastodon = case tom.get_string(toml, ["social", "mastodon"]) {
+    Ok(s) -> Some(s)
+    Error(_) -> None
+  }
+  let bluesky = case tom.get_string(toml, ["social", "bluesky"]) {
+    Ok(s) -> Some(s)
+    Error(_) -> None
+  }
+  SocialLinks(github: github, linkedin: linkedin, mastodon: mastodon, bluesky: bluesky)
 }
 
 fn parse_rss(toml: Dict(String, Toml)) -> RssConfig {

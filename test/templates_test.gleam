@@ -24,7 +24,7 @@ fn test_config() -> Config {
       NavLink(title: "Posts", url: "/posts/"),
       NavLink(title: "About", url: "/about/"),
     ]),
-    social: SocialLinks(github: Some("testuser"), linkedin: Some("testlinkedin")),
+    social: SocialLinks(github: Some("testuser"), linkedin: Some("testlinkedin"), mastodon: None, bluesky: None),
     rss: RssConfig(enabled: True),
     author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
   )

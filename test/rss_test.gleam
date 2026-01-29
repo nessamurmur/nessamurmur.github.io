@@ -14,7 +14,7 @@ pub fn generate_rss_basic_test() {
       base_url: "https://test.com",
       posts_per_page: 10,
       nav: NavConfig(links: []),
-      social: SocialLinks(github: None, linkedin: None),
+      social: SocialLinks(github: None, linkedin: None, mastodon: None, bluesky: None),
       rss: RssConfig(enabled: True),
       author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
     )
@@ -52,7 +52,7 @@ pub fn generate_rss_channel_info_test() {
       base_url: "https://blog.example.com",
       posts_per_page: 10,
       nav: NavConfig(links: []),
-      social: SocialLinks(github: None, linkedin: None),
+      social: SocialLinks(github: None, linkedin: None, mastodon: None, bluesky: None),
       rss: RssConfig(enabled: True),
       author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
     )
@@ -73,7 +73,7 @@ pub fn generate_rss_items_test() {
       base_url: "https://test.com",
       posts_per_page: 10,
       nav: NavConfig(links: []),
-      social: SocialLinks(github: None, linkedin: None),
+      social: SocialLinks(github: None, linkedin: None, mastodon: None, bluesky: None),
       rss: RssConfig(enabled: True),
       author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
     )
@@ -109,7 +109,7 @@ pub fn generate_rss_escape_special_chars_test() {
       base_url: "https://test.com",
       posts_per_page: 10,
       nav: NavConfig(links: []),
-      social: SocialLinks(github: None, linkedin: None),
+      social: SocialLinks(github: None, linkedin: None, mastodon: None, bluesky: None),
       rss: RssConfig(enabled: True),
       author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
     )
@@ -143,7 +143,7 @@ pub fn generate_rss_multiple_posts_test() {
       base_url: "https://test.com",
       posts_per_page: 10,
       nav: NavConfig(links: []),
-      social: SocialLinks(github: None, linkedin: None),
+      social: SocialLinks(github: None, linkedin: None, mastodon: None, bluesky: None),
       rss: RssConfig(enabled: True),
       author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
     )
@@ -194,7 +194,7 @@ pub fn generate_rss_no_description_test() {
       base_url: "https://test.com",
       posts_per_page: 10,
       nav: NavConfig(links: []),
-      social: SocialLinks(github: None, linkedin: None),
+      social: SocialLinks(github: None, linkedin: None, mastodon: None, bluesky: None),
       rss: RssConfig(enabled: True),
       author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
     )

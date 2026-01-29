@@ -15,6 +15,8 @@ links = [
 [social]
 github = "nessamurmur"
 linkedin = "divergentmindsthrive"
+mastodon = "https://tech.lgbt/@nessamurmur"
+bluesky = "https://bsky.app/profile/nessamurmur.tech.lgbt.ap.brid.gy"
 
 [rss]
 enabled = true
