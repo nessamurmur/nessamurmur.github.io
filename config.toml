@@ -9,6 +9,7 @@ links = [
   { title = "Posts", url = "/posts/" },
   { title = "Categories", url = "/categories/" },
   { title = "About", url = "/about/" },
+  { title = "Digital Garden", url = "https://nessamurmur.notion.site" },
 ]
 
 [social]
