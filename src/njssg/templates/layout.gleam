@@ -20,6 +20,14 @@ pub fn render(
       meta([name("description"), attribute("content", config.description)]),
       meta([name("author"), attribute("content", config.author)]),
       title([], page_title <> " | " <> config.title),
+      html.script([], "
+        (function(){
+          var t = localStorage.getItem('theme');
+          if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+          }
+        })();
+      "),
       link([rel("stylesheet"), href("/css/style.css")]),
       case config.rss.enabled {
         True ->
@@ -32,7 +40,7 @@ pub fn render(
         False -> text("")
       },
     ]),
-    body([class("min-h-screen bg-gray-50")], [
+    body([class("min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100")], [
       components.site_nav(config),
       div([class("main-content container mx-auto px-4 py-8")], [page_content]),
       components.site_footer(config),

@@ -4,7 +4,7 @@
 
 /* Site navigation */
 .site-nav {
-  @apply bg-white shadow-sm sticky top-0 z-50;
+  @apply bg-white dark:bg-gray-800 shadow-sm dark:shadow-gray-900/20 sticky top-0 z-50;
 }
 
 .nav-container {
@@ -12,7 +12,7 @@
 }
 
 .site-title {
-  @apply text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors;
+  @apply text-xl font-bold text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors;
 }
 
 .nav-links {
@@ -20,12 +20,17 @@
 }
 
 .nav-link {
-  @apply text-gray-600 hover:text-blue-600 transition-colors;
+  @apply text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  @apply p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer text-lg leading-none;
 }
 
 /* Site footer */
 .site-footer {
-  @apply bg-gray-100 mt-auto;
+  @apply bg-gray-100 dark:bg-gray-800 mt-auto;
 }
 
 .footer-container {
@@ -37,7 +42,7 @@
 }
 
 .social-link {
-  @apply text-gray-600 hover:text-blue-600 transition-colors;
+  @apply text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors;
 }
 
 .rss-link {
@@ -54,11 +59,11 @@
 }
 
 .hero-title {
-  @apply text-4xl md:text-5xl font-bold text-gray-900 mb-4;
+  @apply text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4;
 }
 
 .hero-description {
-  @apply text-xl text-gray-600 max-w-2xl mx-auto;
+  @apply text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto;
 }
 
 .recent-posts {
@@ -66,7 +71,7 @@
 }
 
 .section-header {
-  @apply text-2xl font-bold text-gray-900 border-b border-gray-200 pb-2;
+  @apply text-2xl font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2;
 }
 
 /* Post cards */
@@ -75,23 +80,23 @@
 }
 
 .post-card {
-  @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow;
+  @apply bg-white dark:bg-gray-800 rounded-lg shadow-sm dark:shadow-gray-900/20 border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow;
 }
 
 .post-card .post-title {
-  @apply text-xl font-semibold text-gray-900 m-0;
+  @apply text-xl font-semibold text-gray-900 dark:text-gray-100 m-0;
 }
 
 .post-card .post-title a {
-  @apply hover:text-blue-600 transition-colors no-underline;
+  @apply hover:text-blue-600 dark:hover:text-blue-400 transition-colors no-underline;
 }
 
 .post-date {
-  @apply text-sm text-gray-500;
+  @apply text-sm text-gray-500 dark:text-gray-400;
 }
 
 .post-excerpt {
-  @apply text-gray-600 mt-2 line-clamp-3;
+  @apply text-gray-600 dark:text-gray-300 mt-2 line-clamp-3;
 }
 
 .post-categories {
@@ -99,7 +104,7 @@
 }
 
 .category-tag {
-  @apply inline-block px-2 py-1 bg-gray-100 text-gray-600 text-sm rounded hover:bg-blue-100 hover:text-blue-700 transition-colors no-underline;
+  @apply inline-block px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm rounded hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-700 dark:hover:text-blue-300 transition-colors no-underline;
 }
 
 .view-all {
@@ -107,11 +112,11 @@
 }
 
 .view-all-link {
-  @apply text-blue-600 hover:text-blue-800 font-medium;
+  @apply text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium;
 }
 
 .no-posts {
-  @apply text-gray-500 text-center py-8;
+  @apply text-gray-500 dark:text-gray-400 text-center py-8;
 }
 
 /* Single post page */
@@ -120,11 +125,11 @@
 }
 
 .post-page .post-header {
-  @apply mb-8 pb-8 border-b border-gray-200;
+  @apply mb-8 pb-8 border-b border-gray-200 dark:border-gray-700;
 }
 
 .post-page .post-title {
-  @apply text-3xl md:text-4xl font-bold text-gray-900 mb-4;
+  @apply text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4;
 }
 
 .post-page .post-meta {
@@ -132,7 +137,7 @@
 }
 
 .post-content {
-  @apply prose prose-lg max-w-none;
+  @apply prose prose-lg dark:prose-invert max-w-none;
 }
 
 .post-content pre {
@@ -140,7 +145,7 @@
 }
 
 .post-content code {
-  @apply bg-gray-100 text-gray-800 px-1 py-0.5 rounded text-sm;
+  @apply bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-1 py-0.5 rounded text-sm;
 }
 
 .post-content pre code {
@@ -153,15 +158,15 @@
 }
 
 .page-header {
-  @apply mb-8 pb-8 border-b border-gray-200;
+  @apply mb-8 pb-8 border-b border-gray-200 dark:border-gray-700;
 }
 
 .page-title {
-  @apply text-3xl md:text-4xl font-bold text-gray-900;
+  @apply text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100;
 }
 
 .page-content {
-  @apply prose prose-lg max-w-none;
+  @apply prose prose-lg dark:prose-invert max-w-none;
 }
 
 /* Posts listing */
@@ -170,7 +175,7 @@
 }
 
 .posts-listing .page-title {
-  @apply text-3xl font-bold text-gray-900 mb-8;
+  @apply text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8;
 }
 
 /* Categories */
@@ -179,7 +184,7 @@
 }
 
 .categories-listing .page-title {
-  @apply text-3xl font-bold text-gray-900 mb-8;
+  @apply text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8;
 }
 
 .categories-list {
@@ -187,7 +192,7 @@
 }
 
 .category-item {
-  @apply bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow;
+  @apply bg-white dark:bg-gray-800 rounded-lg shadow-sm dark:shadow-gray-900/20 border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow;
 }
 
 .category-link {
@@ -195,11 +200,11 @@
 }
 
 .category-name {
-  @apply text-lg font-semibold text-gray-900;
+  @apply text-lg font-semibold text-gray-900 dark:text-gray-100;
 }
 
 .category-count {
-  @apply text-gray-500;
+  @apply text-gray-500 dark:text-gray-400;
 }
 
 /* Category posts page */
@@ -208,12 +213,12 @@
 }
 
 .category-posts .page-title {
-  @apply text-3xl font-bold text-gray-900 mb-8;
+  @apply text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8;
 }
 
 /* Pagination */
 .pagination {
-  @apply flex items-center justify-center gap-4 mt-12 pt-8 border-t border-gray-200;
+  @apply flex items-center justify-center gap-4 mt-12 pt-8 border-t border-gray-200 dark:border-gray-700;
 }
 
 .pagination-link {
@@ -225,9 +230,9 @@
 }
 
 .pagination-link.disabled {
-  @apply bg-gray-100 text-gray-400 cursor-not-allowed;
+  @apply bg-gray-100 dark:bg-gray-700 text-gray-400 cursor-not-allowed;
 }
 
 .pagination-info {
-  @apply text-gray-600;
+  @apply text-gray-600 dark:text-gray-300;
 }

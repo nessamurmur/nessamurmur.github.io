@@ -1,7 +1,7 @@
 import gleam/int
 import gleam/list
 import gleam/option.{None, Some}
-import lustre/attribute.{class, href}
+import lustre/attribute.{attribute, class, href}
 import lustre/element.{type Element, text}
 import lustre/element/html
 import njssg/config.{type Config}
@@ -19,6 +19,14 @@ pub fn site_nav(config: Config) -> Element(msg) {
     html.div([class("nav-container")], [
       html.a([href("/"), class("site-title")], [text(config.title)]),
       html.ul([class("nav-links")], links),
+      html.button(
+        [
+          class("theme-toggle"),
+          attribute("onclick", "document.documentElement.classList.toggle('dark');localStorage.setItem('theme',document.documentElement.classList.contains('dark')?'dark':'light')"),
+          attribute("aria-label", "Toggle dark mode"),
+        ],
+        [text("\u{1f313}")],
+      ),
     ]),
   ])
 }
@@ -159,7 +167,7 @@ pub fn author_bio(config: Config) -> Element(msg) {
   }
 
   let tagline_el = case config.author_config.tagline {
-    Some(t) -> html.p([class("text-gray-600 mb-4")], [text(t)])
+    Some(t) -> html.p([class("text-gray-600 dark:text-gray-300 mb-4")], [text(t)])
     None -> text("")
   }
 
