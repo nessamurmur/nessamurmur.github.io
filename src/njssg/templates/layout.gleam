@@ -29,6 +29,35 @@ pub fn render(
         })();
       "),
       link([rel("stylesheet"), href("/css/style.css")]),
+      html.script(
+        [attribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js")],
+        "",
+      ),
+      html.script(
+        [attribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/elixir.min.js")],
+        "",
+      ),
+      html.script(
+        [attribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/ruby.min.js")],
+        "",
+      ),
+      html.script(
+        [attribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/yaml.min.js")],
+        "",
+      ),
+      html.script(
+        [attribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/lisp.min.js")],
+        "",
+      ),
+      html.script(
+        [attribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/shell.min.js")],
+        "",
+      ),
+      html.script(
+        [attribute("src", "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/gleam.min.js")],
+        "",
+      ),
+      html.script([], "hljs.highlightAll();"),
       case config.rss.enabled {
         True ->
           link([
