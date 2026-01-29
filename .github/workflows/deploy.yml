@@ -36,7 +36,6 @@ jobs:
       - run: gleam deps download
       - run: gleam run -- build
       - run: npm run build:css
-      - run: cp CNAME public/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
