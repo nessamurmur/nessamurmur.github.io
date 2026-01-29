@@ -145,3 +145,51 @@ pub fn pagination(current_page: Int, total_pages: Int) -> Element(msg) {
 pub fn section_header(title: String) -> Element(msg) {
   html.h3([class("section-header")], [text(title)])
 }
+
+/// Author bio section for homepage
+pub fn author_bio(config: Config) -> Element(msg) {
+  let avatar = case config.author_config.avatar_url {
+    Some(url) ->
+      html.img([
+        attribute.attribute("src", url),
+        attribute.attribute("alt", config.author),
+        class("w-24 h-24 rounded-full mx-auto mb-4"),
+      ])
+    None -> text("")
+  }
+
+  let tagline_el = case config.author_config.tagline {
+    Some(t) -> html.p([class("text-gray-600 mb-4")], [text(t)])
+    None -> text("")
+  }
+
+  let social_links = case config.social.github, config.social.linkedin {
+    Some(gh), Some(li) -> [
+      html.a([href("https://github.com/" <> gh), class("social-link")], [text("GitHub")]),
+      html.a([href("https://linkedin.com/in/" <> li), class("social-link")], [text("LinkedIn")]),
+    ]
+    Some(gh), None -> [
+      html.a([href("https://github.com/" <> gh), class("social-link")], [text("GitHub")]),
+    ]
+    None, Some(li) -> [
+      html.a([href("https://linkedin.com/in/" <> li), class("social-link")], [text("LinkedIn")]),
+    ]
+    None, None -> []
+  }
+
+  let extra = list.map(config.author_config.extra_links, fn(link) {
+    html.a([href(link.url), class("social-link")], [text(link.title)])
+  })
+
+  let all_links = list.append(social_links, extra)
+
+  html.section([class("text-center py-12 mb-8")], [
+    avatar,
+    html.h2([class("text-2xl font-bold mb-2")], [text(config.author)]),
+    tagline_el,
+    case all_links {
+      [] -> text("")
+      links -> html.div([class("flex justify-center gap-4 flex-wrap")], links)
+    },
+  ])
+}

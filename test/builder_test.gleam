@@ -2,7 +2,7 @@ import gleam/option.{None, Some}
 import gleam/string
 import gleeunit/should
 import njssg/builder
-import njssg/config.{type Config, Config, NavConfig, RssConfig, SocialLinks}
+import njssg/config.{type Config, AuthorConfig, Config, NavConfig, RssConfig, SocialLinks}
 import njssg/content.{type Page, type Post, Page, Post}
 
 fn test_config() -> Config {
@@ -15,6 +15,7 @@ fn test_config() -> Config {
     nav: NavConfig(links: []),
     social: SocialLinks(github: None, linkedin: None),
     rss: RssConfig(enabled: True),
+    author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
   )
 }
 

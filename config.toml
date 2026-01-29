@@ -13,7 +13,12 @@ links = [
 
 [social]
 github = "nessamurmur"
-linkedin = "nessajane"
+linkedin = "divergentmindsthrive"
 
 [rss]
 enabled = true
+
+[author_config]
+avatar_url = "https://avatars.githubusercontent.com/u/1949235"
+tagline = "Software Engineer, Manager, Coach."
+extra_links = [{ title = "Coaching", url = "https://divergentmindsthrive.com" }]

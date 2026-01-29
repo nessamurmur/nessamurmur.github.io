@@ -14,6 +14,7 @@ pub type Config {
     nav: NavConfig,
     social: SocialLinks,
     rss: RssConfig,
+    author_config: AuthorConfig,
   )
 }
 
@@ -31,6 +32,14 @@ pub type SocialLinks {
 
 pub type RssConfig {
   RssConfig(enabled: Bool)
+}
+
+pub type AuthorConfig {
+  AuthorConfig(
+    avatar_url: Option(String),
+    tagline: Option(String),
+    extra_links: List(NavLink),
+  )
 }
 
 pub type ConfigError {
@@ -56,6 +65,7 @@ pub fn parse(toml_string: String) -> Result(Config, ConfigError) {
   let nav = parse_nav(parsed)
   let social = parse_social(parsed)
   let rss = parse_rss(parsed)
+  let author_config = parse_author_config(parsed)
 
   Ok(Config(
     title: title,
@@ -66,6 +76,7 @@ pub fn parse(toml_string: String) -> Result(Config, ConfigError) {
     nav: nav,
     social: social,
     rss: rss,
+    author_config: author_config,
   ))
 }
 
@@ -79,37 +90,37 @@ fn get_string(
   })
 }
 
+fn parse_inline_link(item: Toml) -> Result(NavLink, Nil) {
+  case item {
+    tom.InlineTable(table) -> {
+      let title =
+        dict.get(table, "title")
+        |> result.try(fn(v) {
+          case v {
+            tom.String(s) -> Ok(s)
+            _ -> Error(Nil)
+          }
+        })
+      let url =
+        dict.get(table, "url")
+        |> result.try(fn(v) {
+          case v {
+            tom.String(s) -> Ok(s)
+            _ -> Error(Nil)
+          }
+        })
+      case title, url {
+        Ok(t), Ok(u) -> Ok(NavLink(title: t, url: u))
+        _, _ -> Error(Nil)
+      }
+    }
+    _ -> Error(Nil)
+  }
+}
+
 fn parse_nav(toml: Dict(String, Toml)) -> NavConfig {
   let links = case tom.get_array(toml, ["nav", "links"]) {
-    Ok(link_array) -> {
-      list.filter_map(link_array, fn(item) {
-        case item {
-          tom.InlineTable(table) -> {
-            let title =
-              dict.get(table, "title")
-              |> result.try(fn(v) {
-                case v {
-                  tom.String(s) -> Ok(s)
-                  _ -> Error(Nil)
-                }
-              })
-            let url =
-              dict.get(table, "url")
-              |> result.try(fn(v) {
-                case v {
-                  tom.String(s) -> Ok(s)
-                  _ -> Error(Nil)
-                }
-              })
-            case title, url {
-              Ok(t), Ok(u) -> Ok(NavLink(title: t, url: u))
-              _, _ -> Error(Nil)
-            }
-          }
-          _ -> Error(Nil)
-        }
-      })
-    }
+    Ok(link_array) -> list.filter_map(link_array, parse_inline_link)
     Error(_) -> []
   }
   NavConfig(links: links)
@@ -133,6 +144,22 @@ fn parse_rss(toml: Dict(String, Toml)) -> RssConfig {
     Error(_) -> True  // default to enabled
   }
   RssConfig(enabled: enabled)
+}
+
+fn parse_author_config(toml: Dict(String, Toml)) -> AuthorConfig {
+  let avatar_url = case tom.get_string(toml, ["author_config", "avatar_url"]) {
+    Ok(s) -> Some(s)
+    Error(_) -> None
+  }
+  let tagline = case tom.get_string(toml, ["author_config", "tagline"]) {
+    Ok(s) -> Some(s)
+    Error(_) -> None
+  }
+  let extra_links = case tom.get_array(toml, ["author_config", "extra_links"]) {
+    Ok(arr) -> list.filter_map(arr, parse_inline_link)
+    Error(_) -> []
+  }
+  AuthorConfig(avatar_url: avatar_url, tagline: tagline, extra_links: extra_links)
 }
 
 pub fn get_nav_links(config: Config) -> List(NavLink) {

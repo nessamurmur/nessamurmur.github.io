@@ -60,10 +60,9 @@ pub fn get_all_paths(output: BuildOutput) -> List(String) {
 fn build_home(
   files: Dict(String, String),
   config: Config,
-  posts: List(Post),
+  _posts: List(Post),
 ) -> Dict(String, String) {
-  let recent = list.take(posts, 5)
-  let content = home_template.render(config, recent)
+  let content = home_template.render(config)
   let html =
     layout.render(config, "Home", content)
     |> layout.to_html_string

@@ -1,7 +1,7 @@
 import gleam/option.{None, Some}
 import gleam/string
 import gleeunit/should
-import njssg/config.{Config, NavConfig, RssConfig, SocialLinks}
+import njssg/config.{AuthorConfig, Config, NavConfig, RssConfig, SocialLinks}
 import njssg/content.{Post}
 import njssg/rss
 
@@ -16,6 +16,7 @@ pub fn generate_rss_basic_test() {
       nav: NavConfig(links: []),
       social: SocialLinks(github: None, linkedin: None),
       rss: RssConfig(enabled: True),
+      author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
     )
 
   let posts = [
@@ -53,6 +54,7 @@ pub fn generate_rss_channel_info_test() {
       nav: NavConfig(links: []),
       social: SocialLinks(github: None, linkedin: None),
       rss: RssConfig(enabled: True),
+      author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
     )
 
   let xml = rss.generate(config, [])
@@ -73,6 +75,7 @@ pub fn generate_rss_items_test() {
       nav: NavConfig(links: []),
       social: SocialLinks(github: None, linkedin: None),
       rss: RssConfig(enabled: True),
+      author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
     )
 
   let posts = [
@@ -108,6 +111,7 @@ pub fn generate_rss_escape_special_chars_test() {
       nav: NavConfig(links: []),
       social: SocialLinks(github: None, linkedin: None),
       rss: RssConfig(enabled: True),
+      author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
     )
 
   let posts = [
@@ -141,6 +145,7 @@ pub fn generate_rss_multiple_posts_test() {
       nav: NavConfig(links: []),
       social: SocialLinks(github: None, linkedin: None),
       rss: RssConfig(enabled: True),
+      author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
     )
 
   let posts = [
@@ -191,6 +196,7 @@ pub fn generate_rss_no_description_test() {
       nav: NavConfig(links: []),
       social: SocialLinks(github: None, linkedin: None),
       rss: RssConfig(enabled: True),
+      author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
     )
 
   let posts = [

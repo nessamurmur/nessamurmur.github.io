@@ -1,8 +1,8 @@
-import gleam/option.{Some}
+import gleam/option.{None, Some}
 import gleam/string
 import gleeunit/should
 import lustre/element
-import njssg/config.{type Config, Config, NavConfig, NavLink, RssConfig, SocialLinks}
+import njssg/config.{type Config, AuthorConfig, Config, NavConfig, NavLink, RssConfig, SocialLinks}
 import njssg/content.{type Page, type Post, Page, Post}
 import njssg/templates/components
 import njssg/templates/layout
@@ -26,6 +26,7 @@ fn test_config() -> Config {
     ]),
     social: SocialLinks(github: Some("testuser"), linkedin: Some("testlinkedin")),
     rss: RssConfig(enabled: True),
+    author_config: AuthorConfig(avatar_url: None, tagline: None, extra_links: []),
   )
 }
 
@@ -107,12 +108,11 @@ pub fn layout_includes_title_test() {
 }
 
 // Home template tests
-pub fn home_renders_recent_posts_test() {
+pub fn home_renders_author_bio_test() {
   let config = test_config()
-  let posts = [test_post()]
-  let html = home.render(config, posts) |> element.to_string
+  let html = home.render(config) |> element.to_string
 
-  should.be_true(html |> string.contains("Test Post Title"))
+  should.be_true(html |> string.contains("home-page"))
 }
 
 // Post template tests
